@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     private void NewRound(){
         foreach (Transform pellet in this.pellets){
-            this.pellet.gameObject.SetActive(true);
+            pellet.gameObject.SetActive(true);
         }
 
         ResetRound();
