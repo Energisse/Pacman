@@ -92,7 +92,12 @@ public class GhostChase : GhostBehavior
             if (previous[currentNeighbor] == -1)
             {
                 //Si sur le meme axe X alors on change la direction de l'axe Y
-                if ((int) transform.position.x == (int) ghost.target.position.x)
+                if (
+                    (int)
+                    Mathf.Abs(transform.position.x - ghost.target.position.x) <
+                    (int)
+                    Mathf.Abs(transform.position.y - ghost.target.position.y)
+                )
                 {
                     ghost
                         .movement
