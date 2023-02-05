@@ -91,32 +91,28 @@ public class GhostChase : GhostBehavior
             //Si le pacman est directement a coté du fantome
             if (previous[currentNeighbor] == -1)
             {
-                //Si sur le meme axe X alors on change la direction de l'axe Y
-                if (
-                    (int)
-                    Mathf.Abs(transform.position.x - ghost.target.position.x) <
-                    (int)
-                    Mathf.Abs(transform.position.y - ghost.target.position.y)
+                Vector2 direction = Vector2.zero;
+                float minDistance = float.MaxValue;
+                foreach (Direction
+                    availableDirection
+                    in
+                    node.availableDirections
                 )
                 {
-                    ghost
-                        .movement
-                        .SetDirection(new Vector2(0,
-                            (int) transform.position.y >
-                            (int) ghost.target.position.y
-                                ? -1
-                                : 1));
-                    return;
-                }
+                    Vector3 newPosition =
+                        transform.position +
+                        new Vector3(availableDirection.direction.x,
+                            availableDirection.direction.y);
+                    float distance =
+                        (ghost.target.position - newPosition).sqrMagnitude;
 
-                //Si sur le meme axe Y alors on change la direction de l'axe X
-                ghost
-                    .movement
-                    .SetDirection(new Vector2((int) transform.position.x >
-                        (int) ghost.target.position.x
-                            ? -1
-                            : 1,
-                        0));
+                    if (distance < minDistance)
+                    {
+                        direction = availableDirection.direction;
+                        minDistance = distance;
+                    }
+                }
+                ghost.movement.SetDirection (direction);
                 return;
             }
 
