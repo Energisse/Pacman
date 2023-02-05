@@ -150,10 +150,8 @@ public class GhostChase : GhostBehavior
         {
             Vector3Int centerCell = tilemap.WorldToCell(ghost.target.position);
             Vector3Int targetCell =
-                new Vector3Int(centerCell.x + (int) direction.x,
-                    centerCell.y + (int) direction.y,
-                    centerCell.z);
-            int i = 1;
+                new Vector3Int(centerCell.x, centerCell.y, centerCell.z);
+            int i = 0;
             while (true)
             {
                 //taille maximal de la grille
